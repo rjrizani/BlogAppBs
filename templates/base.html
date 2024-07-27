@@ -6,7 +6,7 @@
 -->
 <html xmlns="http://www.w3.org/1999/html">
 	<head>
-		<title>Future Imperfect by HTML5 UP</title>
+		<title>{{param['title']}}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href={{url_for('static', filename='assets/css/main.css')}} />
@@ -18,7 +18,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="{{url_for('home')}}">Future Imperfect</a></h1>
+						<h1><a href="{{url_for('home')}}">{{param['title']}}</a></h1>
 						<nav class="links">
 							<ul>
 								<li><a href="{{url_for('home')}}">Home</a></li>

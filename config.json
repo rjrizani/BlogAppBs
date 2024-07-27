@@ -1,0 +1,10 @@
+{
+  "parameters": {
+    "secret_key": "1212rizani!@#",
+    "local_server": true,
+    "local_url": "mysql://root@127.0.0.1/BlogApp",
+    "prod_url": "",
+    "title": "The wondering Blog App"
+
+  }
+}

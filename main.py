@@ -1,9 +1,22 @@
 from flask import Flask, render_template,request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import*
+import json
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root@127.0.0.1/BlogApp"
+
+with open('config.json', 'r') as c:
+    param = json.load(c)["parameters"]
+
+if param["local_server"]:
+    app.config['SQLALCHEMY_DATABASE_URI'] = param["local_url"]
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = param["prod_url"]
+
+SECRET_KEY = param["secret_key"]
+
+app.config['SECRET_KEY']
+
 db = SQLAlchemy(app)
 #pip install mysqlclient
 # pip3 install mysql-connector
@@ -17,20 +30,22 @@ class Contact(db.Model):
     message = db.Column(db.String(150), nullable=False)
     date = db.Column(db.String(20))
 
+
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", param=param)
 @app.route("/post")
 def post():
-    return render_template("post.html")
+    return render_template("post.html", param=param)
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html", param=param)
 
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    return render_template("login.html", param=param)
 
 @app.route("/contact",methods=['GET','POST'])
 def contact():
@@ -41,7 +56,7 @@ def contact():
         entry = Contact(name=Name,email=Email, message=Msg, date=datetime.today().date())
         db.session.add(entry)
         db.session.commit()
-    return render_template("contact.html")
+    return render_template("contact.html", param=param)
 
 
 
@@ -49,4 +64,4 @@ def contact():
 if __name__=='__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

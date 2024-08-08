@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,redirect,url_for,session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import*
 import json
@@ -25,7 +25,7 @@ db = SQLAlchemy(app)
 
 
 class Contact(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
+    sno = db.Column('sno',db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     message = db.Column(db.String(150), nullable=False)
@@ -93,6 +93,18 @@ def contact():
         db.session.add(entry)
         db.session.commit()
     return render_template("contact.html", param=param)
+
+@app.route("/admin",methods=['GET', 'POST'])
+def dashboard():
+    posts = Posts.query.filter_by().all()
+    contacts = Contact.query.filter_by().all()
+    return render_template("admin/index.html", param=param, posts=posts, contacts=contacts)
+
+
+@app.route("/edit")
+def edithtml():
+    return render_template("admin/editPost.html", param=param)
+
 
 
 

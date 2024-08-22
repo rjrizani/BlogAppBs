@@ -4,25 +4,28 @@
 {% block body %}
 <!-- templates\login.html -->
 <div class="container">
-        <h1>Login</h1>
-
+        <h1>Sign UP</h1>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div>
-    {{ messages[0] }} Go to <a href="{{url_for('signup')}}">Sign Up</a>
+        <h6>
+              {{ messages[0] }} Go to <a href="{{url_for('login')}}">Login page</a>
+        </h6>
+
     </div>
     {% endif %}
     {% endwith %}
-
-        <form method="post" action="/login" >
+        <form method="post" action="" >
+            <label for="name">name:</label>
+            <input type="text" id="name" name="name" required>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
+            <label for="email">email:</label>
+            <input type="text" id="email" name="email" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit" class="button large "> Login</button>
+            <button type="submit" class="button large "> Sign Up</button>
         </form>
-    <h5><a href="{{url_for('signup')}}">Create an account</a> </h5>
-
 
 </div>
 

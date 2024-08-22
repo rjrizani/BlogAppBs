@@ -18,6 +18,12 @@
        aria-controls="collapseExample">
         Contact
     </a>
+
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="/editPost/0" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        Add new post
+    </a>
+
     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample">
         Logout
@@ -38,8 +44,8 @@
     <tr>
       <th scope="row">{{post.post_id}}</th>
       <td>{{post.title}}</td>
-      <td> <a href=""> <button type="button" class="btn btn-info">Edit</button> </a>
-            <a href=""> <button type="button" class="btn btn-danger">Delete</button> </a>
+      <td> <a href="/editPost/{{post.post_id}}"> <button type="button" class="btn btn-info">Edit</button> </a>
+            <a href="/delete/{{post.post_id}} "> <button type="button" class="btn btn-danger">Delete</button> </a>
       </td>
     </tr>
   {% endfor %}

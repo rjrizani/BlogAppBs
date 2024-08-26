@@ -102,6 +102,13 @@ def login():
             return redirect(url_for('login'))
     return render_template("login.html", param=param)
 
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 @app.route("/contact",methods=['GET','POST'])
 def contact():
     if (request.method=='POST'):
@@ -114,10 +121,14 @@ def contact():
     return render_template("contact.html", param=param)
 
 @app.route("/admin",methods=['GET', 'POST'])
+@login_required
 def dashboard():
-    posts = Posts.query.filter_by().all()
+    user = current_user.name
+    posts = Posts.query.filter_by(author=user).all()
     contacts = Contact.query.filter_by().all()
-    return render_template("admin/index.html", param=param, posts=posts, contacts=contacts)
+    if not current_user.username == param['admin']:
+        style= 'display:none;'
+    return render_template("admin/index.html", param=param, posts=posts, contacts=contacts, user=user)
 
 
 @app.route("/editPost/<string:post_id>",methods=['GET', 'POST'])

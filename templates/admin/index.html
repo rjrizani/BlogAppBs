@@ -9,12 +9,15 @@
 </head>
 <body>
 <h1>Admin Dashboard</h1>
+<br>
+<h5>Welcome {{current_user.username}}!!</h5>
+<br>
 <p class="d-inline-flex gap-1">
     <a class="btn btn-primary" data-bs-toggle="collapse" href="#Posts" role="button" aria-expanded="false"
        aria-controls="collapseExample">
         Post
     </a>
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#Contact" role="button" aria-expanded="false"
+    <a  class="btn btn-primary" data-bs-toggle="collapse" href="#Contact" role="button" aria-expanded="false"
        aria-controls="collapseExample">
         Contact
     </a>
@@ -24,10 +27,9 @@
         Add new post
     </a>
 
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample">
-        Logout
-    </button>
+
+        <a class="btn btn-primary" href="{{url_for('logout')}}">Logout</a>
+
 </p>
 <div class="collapse" id="Posts">
     <div class="card card-body">

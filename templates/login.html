@@ -9,7 +9,10 @@
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <div>
-    {{ messages[0] }} Go to <a href="{{url_for('signup')}}">Sign Up</a>
+        <h6>
+            {{ messages[0] }} Go to <a href="{{url_for('signup')}}">Sign Up</a>
+        </h6>
+
     </div>
     {% endif %}
     {% endwith %}
